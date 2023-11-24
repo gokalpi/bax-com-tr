@@ -32,7 +32,7 @@ const navigation = [
 export default function Footer() {
   return (
     <footer className='bg-slate-600'>
-      <div className='max-w-7xl mx-auto py-8 px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 text-slate-100'>
+      <div className='max-w-7xl mx-auto py-4 px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 text-slate-100'>
         <div className='mb-8 md:mb-0'>
           <p className='font-bold flex items-center justify-center'>BİZE ULAŞIN</p>
           <p className='flex items-center justify-center'>Levent Mah. Çayır Çimen Sk.</p>

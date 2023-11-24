@@ -1,87 +1,165 @@
 'use client';
 
-import { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Fragment, useState } from 'react';
+import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
+import { Bars3Icon, ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const navigation = [
-  { name: 'Hakkımızda', href: '/about' },
-  { name: 'Projeler', href: '/projects' },
-  { name: 'Referanslar', href: '#references' },
-  { name: 'İletişim', href: '/#contact-us' },
+const projects = [
+  { name: 'MAĞAZA', href: '#' },
+  { name: 'OTEL', href: '#' },
+  { name: 'RESTAURANT', href: '#', icon: ShieldCheckIcon },
+  { name: 'OFİS', href: '#' },
+  { name: 'KONFERANS SALONU', href: '#' },
+  { name: 'KONUT', href: '#' },
 ];
 
 export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <Popover as='header' className='z-50 sticky top-0 bg-white'>
-      <div className='full-container px-4 sm:px-6 lg:px-8'>
-        <div className='flex justify-between items-center py-2 md:space-x-10'>
-          <div className='flex justify-start lg:w-0 lg:flex-1'>
-            <Link href='/'>
-              <span className='sr-only'>Bax Mimarlık</span>
-              <Image src='/images/logo-light-sm.jpg' alt='Bax Mimarlık logo' width='148' height='60' />
-            </Link>
-          </div>
-
-          <div className='md:hidden flex items-center'>
-            <div className='-mr-2 -my-2'>
-              <Popover.Button className='rounded-lg p-2 inline-flex items-center justify-center hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500'>
-                <span className='sr-only'>Menüyü Aç</span>
-                <Bars3Icon className='h-6 w-6' aria-hidden='true' />
-              </Popover.Button>
-            </div>
-          </div>
-
-          <div className='hidden md:flex space-x-10'>
-            {navigation.map((item, index) => (
-              <Link key={index} href={item.href} className='no-underline'>
-                {item.name}
-              </Link>
-            ))}
-          </div>
+    <header className='z-30 sticky top-0 bg-white'>
+      <nav className='mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8' aria-label='Global'>
+        <div className='flex lg:flex-1'>
+          <Link href='/' className='-m-1.5 p-1.5'>
+            <span className='sr-only'>Bax Mimarlık</span>
+            <Image src='/images/logo-light-sm.jpg' width={148} height={60} alt='Bax Mimarlık' />
+          </Link>
         </div>
-      </div>
+        <div className='flex lg:hidden'>
+          <button
+            type='button'
+            className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <span className='sr-only'>Menüyü Aç</span>
+            <Bars3Icon className='h-6 w-6' aria-hidden='true' />
+          </button>
+        </div>
+        <Popover.Group className='hidden lg:flex lg:gap-x-12'>
+          <Link href='/about' className='text-sm font-semibold leading-6 text-gray-900'>
+            HAKKIMIZDA
+          </Link>
 
-      <Transition
-        as={Fragment}
-        enter='duration-150 ease-out'
-        enterFrom='opacity-0 scale-95'
-        enterTo='opacity-100 scale-100'
-        leave='duration-100 ease-in'
-        leaveFrom='opacity-100 scale-100'
-        leaveTo='opacity-0 scale-95'
-      >
-        <Popover.Panel focus className='absolute top-0 inset-x-0 p-2 transition transform origin-top md:hidden'>
-          <div className='rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden'>
-            <div className='px-5 pt-4 flex items-center justify-between'>
-              <div className='relative w-36 h-14'>
-                <Image src='/images/logo-light-sm.jpg' alt='Bax Mimarlık logo' width='148' height='60' />
-              </div>
-              <div className='-mr-2'>
-                <Popover.Button className='rounded-lg p-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600'>
-                  <span className='sr-only'>Close menu</span>
-                  <XMarkIcon className='h-6 w-6' aria-hidden='true' />
-                </Popover.Button>
-              </div>
-            </div>
-            <div className='pt-5 pb-6'>
-              <div className='px-2 space-y-1'>
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className='block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-50'
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+          <Popover className='relative'>
+            <Popover.Button className='flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900'>
+              PROJELER
+              <ChevronDownIcon className='h-5 w-5 flex-none text-gray-400' aria-hidden='true' />
+            </Popover.Button>
+
+            <Transition
+              as={Fragment}
+              enter='transition ease-out duration-200'
+              enterFrom='opacity-0 translate-y-1'
+              enterTo='opacity-100 translate-y-0'
+              leave='transition ease-in duration-150'
+              leaveFrom='opacity-100 translate-y-0'
+              leaveTo='opacity-0 translate-y-1'
+            >
+              <Popover.Panel className='absolute -left-8 top-full z-10 mt-3 max-w-md overflow-hidden rounded-xl bg-white shadow-lg ring-1 ring-gray-900/5'>
+                <div className='p-4'>
+                  {projects.map((item) => (
+                    <div
+                      key={item.name}
+                      className='group relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50'
+                    >
+                      <div className='flex-auto'>
+                        <Link href={item.href} className='block font-semibold whitespace-nowrap text-gray-900'>
+                          {item.name}
+                          <span className='absolute inset-0' />
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Popover.Panel>
+            </Transition>
+          </Popover>
+
+          <Link href='/references' className='text-sm font-semibold leading-6 text-gray-900'>
+            REFERANSLAR
+          </Link>
+          <Link href='/contact' className='text-sm font-semibold leading-6 text-gray-900'>
+            İLETİŞİM
+          </Link>
+        </Popover.Group>
+        {/* <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
+          <a href='#' className='text-sm font-semibold leading-6 text-gray-900'>
+            Log in <span aria-hidden='true'>&rarr;</span>
+          </a>
+        </div> */}
+      </nav>
+      <Dialog as='div' className='lg:hidden' open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+        <div className='fixed inset-0 z-10' />
+        <Dialog.Panel className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:ring-1 sm:ring-gray-900/10'>
+          <div className='flex items-center justify-between'>
+            <Link href='/' className='-m-1.5 p-1.5'>
+              <span className='sr-only'>Bax Mimarlık</span>
+              <Image src='/images/logo-light-sm.jpg' width={148} height={60} alt='Bax Mimarlık' />
+            </Link>
+            <button
+              type='button'
+              className='-m-2.5 rounded-md p-2.5 text-gray-700'
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className='sr-only'>Menuyü Kapat</span>
+              <XMarkIcon className='h-6 w-6' aria-hidden='true' />
+            </button>
+          </div>
+          <div className='mt-6 flow-root'>
+            <div className='-my-6 divide-y divide-gray-500/10'>
+              <div className='space-y-2 py-6'>
+                <Link
+                  href='#'
+                  className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                >
+                  HAKKIMIZDA
+                </Link>
+                <Disclosure as='div' className='-mx-3'>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className='flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'>
+                        PROJELER
+                        <ChevronDownIcon
+                          className={clsx(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
+                          aria-hidden='true'
+                        />
+                      </Disclosure.Button>
+                      <Disclosure.Panel className='mt-2 space-y-2'>
+                        {projects.map((item) => (
+                          <Disclosure.Button
+                            key={item.name}
+                            as='a'
+                            href={item.href}
+                            className='block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                          >
+                            {item.name}
+                          </Disclosure.Button>
+                        ))}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+                <Link
+                  href='#'
+                  className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                >
+                  REFERANSLAR
+                </Link>
+                <Link
+                  href='/contact'
+                  className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                >
+                  İLETİŞİM
+                </Link>
               </div>
             </div>
           </div>
-        </Popover.Panel>
-      </Transition>
-    </Popover>
+        </Dialog.Panel>
+      </Dialog>
+    </header>
   );
 }

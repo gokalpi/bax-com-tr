@@ -12,7 +12,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en' className='scroll-smooth'>
-      <body className={`min-h-screen bg-background font-sans antialiased ${fontVariable.className}`}>
+      <body
+        className={`${fontVariable.className} antialiased bg-white dark:bg-slate-900 prose prose-md prose-a:no-underline dark:prose-invert max-w-none min-h-full flex flex-col`}
+      >
         <Header />
         {children}
         <Footer />
