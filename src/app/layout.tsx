@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { fontVariable } from '@/lib/fonts';
+import { fontVariable } from '@/config/fonts';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 

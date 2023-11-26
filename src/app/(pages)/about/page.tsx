@@ -1,12 +1,15 @@
-import { fontSans, fontVariable } from '@/lib/fonts';
+import { fontSans, fontVariable } from '@/config/fonts';
 import Image from 'next/image';
 
 export default function About() {
   return (
     <div className='full-container'>
-      <div className='mb-6 mx-6 sm:mx-12'>
-        <div>
-          <p className='my-6'>
+      <div className='mt-6 sm:mt-20 mb-12 mx-6 sm:mx-12'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16'>
+          <p className={`${fontSans.className} text-2xl sm:text-4xl font-medium`}>
+            Akılcı, estetik ve kolay uygulanabilir detay çözümleri sunuyoruz
+          </p>
+          <p>
             Arzu Başal, Gamze Gökalp Geçer ve Mine Kayalar Gölükçü ortak paydaları olan Mimar Sinan Güzel Sanatlar
             Üniversitesi Mimarlık Fakültesi’nden mezun olmalarının ardından uzun yıllar mimari, iç mimari tasarım, proje
             ve uygulama alanlarında ayrı ayrı tecrübe kazanıp deneyimlerini BAX Mimarlık çatısı altında birleştirdiler.
@@ -28,7 +31,9 @@ export default function About() {
             <Image src='/images/cartoon-character-with-fashion-bag.jpg' alt='GAMZE GÖKALP GEÇER' fill={true} />
           </div>
           <div className='flex-auto w-64'>
-            <p className={`${fontSans.className} text-xl sm:text-2xl font-medium mb-5`}>GAMZE GÖKALP GEÇER | Yönetici Ortak</p>
+            <p className={`${fontSans.className} text-xl sm:text-2xl font-medium mb-5`}>
+              GAMZE GÖKALP GEÇER | Yönetici Ortak
+            </p>
             <p>
               1978 Antalya doğumlu. Antalya Anadolu Lisesi’nin ardından Mimar Sinan Güzel Sanatlar Üniversitesi Mimarlık
               Fakültesi Mimarlık Bölümü’nden mezun oldu. Kariyeri boyunca perakende mağazacılık, otel, konut, konferans
@@ -43,7 +48,9 @@ export default function About() {
             <Image src='/images/doll-with-fashion-bag.jpg' alt='MİNE KAYALAR GÖLÜKÇÜ' fill={true} />
           </div>
           <div className='flex-auto w-64'>
-            <p className={`${fontSans.className} text-xl sm:text-2xl font-medium mb-5`}>MİNE KAYALAR GÖLÜKÇÜ | Yönetici Ortak</p>
+            <p className={`${fontSans.className} text-xl sm:text-2xl font-medium mb-5`}>
+              MİNE KAYALAR GÖLÜKÇÜ | Yönetici Ortak
+            </p>
             <p>
               1985 yılında Yalova’da doğdu. Liseyi İstanbul Kabataş Erkek Lisesi’nde okudu. Mimar Sinan Güzel Sanatlar
               Üniversitesi Mimarlık Bölümü’nden mezun oldu. Ardından tez araştırmasını Viyana Teknik Üniversitesi’nde

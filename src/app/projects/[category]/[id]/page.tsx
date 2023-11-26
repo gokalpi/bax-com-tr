@@ -1,15 +1,15 @@
-import { projects } from '@/lib/projects';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { fontVariable, fontSans } from '@/lib/fonts';
+import { fontVariable, fontSans } from '@/config/fonts';
+import { projects } from '@/config/data/projects';
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ id: project.id }));
+  return projects.map((project) => ({ category: project.category, id: project.id }));
 }
 
 interface Props {
-  params: { id: string };
+  params: { category: string; id: string };
 }
 
 export function generateMetadata({ params }: Props): Metadata {

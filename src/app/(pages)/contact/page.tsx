@@ -1,4 +1,4 @@
-import { fontVariable } from '@/lib/fonts';
+import { fontVariable } from '@/config/fonts';
 
 export default function Contact() {
   return (

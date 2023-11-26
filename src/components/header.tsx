@@ -2,20 +2,12 @@
 
 import { Fragment, useState } from 'react';
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
-import { Bars3Icon, ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const projects = [
-  { name: 'MAĞAZA', href: '#' },
-  { name: 'OTEL', href: '#' },
-  { name: 'RESTAURANT', href: '#', icon: ShieldCheckIcon },
-  { name: 'OFİS', href: '#' },
-  { name: 'KONFERANS SALONU', href: '#' },
-  { name: 'KONUT', href: '#' },
-];
+import { categories } from '@/config/data/categories';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -61,14 +53,14 @@ export default function Header() {
             >
               <Popover.Panel className='absolute -left-8 top-full z-10 mt-3 max-w-md overflow-hidden rounded-xl bg-white shadow-lg ring-1 ring-gray-900/5'>
                 <div className='p-4'>
-                  {projects.map((item) => (
+                  {categories.map((category) => (
                     <div
-                      key={item.name}
+                      key={category.name}
                       className='group relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50'
                     >
                       <div className='flex-auto'>
-                        <Link href={item.href} className='block font-semibold whitespace-nowrap text-gray-900'>
-                          {item.name}
+                        <Link href={category.href} className='block font-semibold whitespace-nowrap uppercase text-gray-900'>
+                          {category.name}
                           <span className='absolute inset-0' />
                         </Link>
                       </div>
@@ -129,14 +121,14 @@ export default function Header() {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className='mt-2 space-y-2'>
-                        {projects.map((item) => (
+                        {categories.map((category) => (
                           <Disclosure.Button
-                            key={item.name}
+                            key={category.name}
                             as='a'
-                            href={item.href}
+                            href={category.href}
                             className='block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50'
                           >
-                            {item.name}
+                            {category.name}
                           </Disclosure.Button>
                         ))}
                       </Disclosure.Panel>
@@ -144,7 +136,7 @@ export default function Header() {
                   )}
                 </Disclosure>
                 <Link
-                  href='#'
+                  href='/references'
                   className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
                 >
                   REFERANSLAR
